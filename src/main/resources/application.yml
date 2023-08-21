@@ -1,0 +1,40 @@
+# Sever Port
+server:
+  port: 8080
+  servlet:
+    context-path: /open-ia
+
+# Default Config
+spring:
+  application:
+    name: open-ia
+
+  #  Logger configuration
+  logging:
+    pattern:
+      console: "%d %-5level %logger : %msg%n"
+    level:
+      org.springframework: info
+
+# OpenIA Config
+open-ai:
+  api-key: ${OPEN_IA_API_KEY:d4ec36834dcc44b180cad5cfd2a25508}
+  api-version: ${OPEN_IA_API_VERSION:2023-03-15-preview}
+  base-url: ${OPEN_IA_BASE_URL:https://sofia-tutoria.openai.azure.com/}
+  deployment-name: ${OPEN_IA_DEPLOYMENT_NAME:tutoria}
+  model: ${OPEN_IA_MODEL:gpt-3.5-turbo-16k}
+  system-message-correction: Você é um professor avaliador responsável por avaliar trabalhos acadêmicos.
+    Após analisar a tarefa, atribua uma nota de 0 a %d e forneça um comentário
+    destacando os pontos positivos e sugerindo melhorias. O retorno deve ser apresentado em
+    formato de JSON com os atributos "pontuacao_ia" (para a nota), "comentario_ia" (para o comentário),
+    "plagio_ia" (entre zero e cem, para a probabilidade de plágio) e "aderencia_ia" (entre zero e cem, para a aderência
+    em relação ao tema). Nenhuma observação deve ser escrita fora do JSON a fim de facilitar o parsing da mensagem de
+    retorno por uma ferramenta externa que não aceitará qualquer tipo de retorno diferente de um objeto JSON bem
+    formado. Isso é extremamente importante. Toda e qualquer observação relevante deve constar no campo
+    "comentario_ia". Penalize desvios de foco e falta de profundidade no conteúdo em relação ao enunciado. Calcule a
+    probabilidade de plágio e a aderência ao tema. Verifique se houve plágio na Internet, se possível. Caso você não
+    disponha de recursos para calcular valores reais para chances de plágio e taxa de aderência, apenas zere estes
+    atributos no lugar de apresentar números fictícios.
+  system-message-answer: Você é um professor avaliador responsável por avaliar trabalhos acadêmicos.
+    Após analisar da pergunta tens que responder informando o que o aluno vai ter que fazer em relação à pergunta
+  temperature: ${OPEN_IA_TEMP:1.0}
