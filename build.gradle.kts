@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.2"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
+    `maven-publish`
 }
 
 group = "br.com.docencia"
@@ -14,8 +15,17 @@ java {
     sourceCompatibility = JavaVersion.VERSION_17
 }
 
+
 repositories {
     mavenCentral()
+    maven {
+        name = "open-ia" // Nome do repositório privado
+        url = uri("https://github.com/pitagorasampli/open-ia/tree/develop")
+        credentials {
+            username = project.findProperty("repoUsername") as String? ?: System.getenv("REPO_USERNAME")
+            password = project.findProperty("repoPassword") as String? ?: System.getenv("REPO_PASSWORD")
+        }
+    }
 }
 
 dependencies {
