@@ -41,8 +41,8 @@ dependencies {
 
     implementation("com.squareup.retrofit2:converter-jackson:2.9.0")
 
-    testImplementation("io.mockk:mockk:1.12.0")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation("io.mockk:mockk:1.13.4")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
