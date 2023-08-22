@@ -21,10 +21,10 @@ repositories {
     maven {
         name = "open-ia" // Nome do repositório privado
         url = uri("https://github.com/pitagorasampli/open-ia/tree/develop")
-        credentials {
-            username = project.findProperty("repoUsername") as String? ?: System.getenv("REPO_USERNAME")
-            password = project.findProperty("repoPassword") as String? ?: System.getenv("REPO_PASSWORD")
-        }
+//        credentials {
+//            username = project.findProperty("repoUsername") as String? ?: System.getenv("REPO_USERNAME")
+//            password = project.findProperty("repoPassword") as String? ?: System.getenv("REPO_PASSWORD")
+//        }
     }
 }
 
@@ -45,6 +45,25 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "open-ia" // Nome do repositório privado
+            url = uri("https://github.com/pitagorasampli/open-ia/tree/develop") // URL do repositório privado
+//            credentials {
+//                username = project.findProperty("repoUsername") as String? ?: System.getenv("REPO_USERNAME")
+//                password = project.findProperty("repoPassword") as String? ?: System.getenv("REPO_PASSWORD")
+//            }
+        }
+    }
+}
+
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
