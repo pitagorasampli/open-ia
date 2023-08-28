@@ -1,2 +1,2 @@
 # open-ia
-lib destiando ao openia
+lib destinado ao openia
